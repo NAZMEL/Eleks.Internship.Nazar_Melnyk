@@ -16,7 +16,8 @@ Practical task of Nazar Melnyk for Eleks Internship (November 2017)
 *	Також дані про обєм вільного місця та наявність інтернет зєднання повинні записуватись в файли при старті та запунці Windows Service.
 
 
-For INSTALL service follow next steps:
+
+##### For INSTALL service follow next steps:
 
 ![Alt text](/templates/1.jpg)
 
