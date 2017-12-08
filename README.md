@@ -21,17 +21,17 @@ Practical task of Nazar Melnyk for Eleks Internship (November 2017)
 
 ![Alt text](/templates/1.jpg)
 
-For UNINSTALL service follow next steps:
+##### For UNINSTALL service follow next steps:
 
 ![Alt text](/templates/2.jpg)
 
 
-Afer install the service is appearing in list of services on your workstation.
+##### Afer install the service is appearing in list of services on your workstation.
 
 ![Alt text](/templates/4.jpg)
 
 
-File which contains results data of system's tracking memory of disc C and network is on the way: C:\Temp\SystemAnalyzer.txt
+##### File which contains results data of system's tracking memory of disc C and network is on the way: C:\Temp\SystemAnalyzer.txt
 
 ![Alt text](/templates/3.jpg)
 
