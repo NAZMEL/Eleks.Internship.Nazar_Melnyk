@@ -15,3 +15,11 @@ Practical task of Nazar Melnyk for Eleks Internship (November 2017)
 *	Наявність Інтернет зєднання. При зміні стану Інтернет зєднання в файл повинен записуватись лог наступного формату - “{дата і час} зміна стану Інтернет зєднання - {Підключено/Відключено}”.
 *	Також дані про обєм вільного місця та наявність інтернет зєднання повинні записуватись в файли при старті та запунці Windows Service.
 
+
+![Alt text](/templates/1.jpg)
+
+![Alt text](/templates/2.jpg)
+
+![Alt text](/templates/3.jpg)
+
+![Alt text](/templates/4.jpg)
