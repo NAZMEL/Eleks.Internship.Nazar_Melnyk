@@ -14,7 +14,7 @@ namespace SystemAnalyzer
         string server = "google.com";
         Ping ping = new System.Net.NetworkInformation.Ping();
         public string path = @"C:\Temp\SystemAnalyzer.txt";
-        CultureInfo currentTime = new CultureInfo("en-GB");
+        CultureInfo currentTime = new CultureInfo("uk-UA");
         bool general;
         public StatusNetwork()
         {
