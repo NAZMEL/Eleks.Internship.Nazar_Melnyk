@@ -23,9 +23,14 @@ namespace SystemAnalyzer
         {
             DriveInfo[] drives = DriveInfo.GetDrives();
             drive = drives[0];
+            ExistDirectory("C:\\Temp");
             start_Status_Memory = FreezeSize();
         }
 
+        private static void ExistDirectory(string directoryName)
+        {
+            if (!Directory.Exists(directoryName)) Directory.CreateDirectory(directoryName);
+        }
         private static long FreezeSize()
         {
             return (ConvertToMB(drive.TotalFreeSpace));
