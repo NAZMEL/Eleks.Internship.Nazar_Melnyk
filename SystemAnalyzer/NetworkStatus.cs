@@ -5,23 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.NetworkInformation;
 using System.Globalization;
-using System.IO;
+using System.IO;// remove unnecessary usings
 
 namespace SystemAnalyzer
 {
     class StatusNetwork
     {
         string server = "google.com";
-        Ping ping = new System.Net.NetworkInformation.Ping();
+        Ping ping = new System.Net.NetworkInformation.Ping();//simlify names
         public string path = @"C:\Temp\SystemAnalyzer.txt";
-        CultureInfo currentTime = new CultureInfo("uk-UA");
+        CultureInfo currentTime = new CultureInfo("uk-UA");// don't understand why you use different cultures, one more reason to use special service for writing logs
         bool general;
         public StatusNetwork()
         {
             general = TestNetStatus();
         }
 
-        public bool TestNetStatus()
+        public bool TestNetStatus() // no reason to make it public
         {
             try
             {

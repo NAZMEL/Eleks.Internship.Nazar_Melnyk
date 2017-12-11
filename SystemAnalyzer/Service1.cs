@@ -11,7 +11,7 @@ using System.Threading;
 
 using System.Net.NetworkInformation;
 using System.Globalization;
-using System.IO;
+using System.IO;// remove unnecessary usings
 
 namespace SystemAnalyzer
 {
@@ -21,7 +21,7 @@ namespace SystemAnalyzer
 
         private System.Timers.Timer timer;
 
-        event WriteMessage Recording;
+        event WriteMessage Recording; // better to use System.Action delegate
         DisckDetection watcher;
         StatusNetwork watcherNet;
 
@@ -29,7 +29,7 @@ namespace SystemAnalyzer
         {
             InitializeComponent();
 
-            this.ServiceName = "SysService";
+            this.ServiceName = "SysService";//remove unnecessary this(not only in this line)
             this.CanStop = true;
             this.CanPauseAndContinue = false;
             this.AutoLog = true;
@@ -47,7 +47,7 @@ namespace SystemAnalyzer
             this.timer.Enabled = true;
             this.timer.AutoReset = true;
             this.timer.Interval = 10000;
-            this.timer.Elapsed += new System.Timers.ElapsedEventHandler(this.timerElapsed);
+            this.timer.Elapsed += new System.Timers.ElapsedEventHandler(this.timerElapsed); // better to use lambda function and don't create special method
             this.timer.Start();
 
             watcher.WriteDataOnStart();
@@ -64,6 +64,7 @@ namespace SystemAnalyzer
 
         protected override void OnShutdown()
         {
+            // maybe need to stop Timer here
             watcher.WriteDataOnEnd();
             watcherNet.WriteStatusNetStartOrEnd();
         }

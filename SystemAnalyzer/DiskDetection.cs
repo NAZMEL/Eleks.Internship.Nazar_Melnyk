@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
-using System.IO;
+using System.IO;//remove unnecessary usings
 
 namespace SystemAnalyzer
 {
-    class DisckDetection
+    class DisckDetection // could use Singleton pattern in this case
     {
 
-        public string path = @"C:\Temp\SystemAnalyzer.txt";
+        public string path = @"C:\Temp\SystemAnalyzer.txt"; //it's no reason to make it public
 
         CultureInfo currentTime = new CultureInfo("en-GB");
 
@@ -27,7 +27,7 @@ namespace SystemAnalyzer
             start_Status_Memory = FreezeSize();
         }
 
-        private static void ExistDirectory(string directoryName)
+        private static void ExistDirectory(string directoryName)// try not to mix static methods with class members
         {
             if (!Directory.Exists(directoryName)) Directory.CreateDirectory(directoryName);
         }
@@ -51,8 +51,8 @@ namespace SystemAnalyzer
                 start_Status_Memory = current_Status_Memory;
             }
         }
-
-        public void WriteData(long startSize, long tmpSize)
+        // the difference between next 3 methods is only in message they write to file, maybe better solution will be create special service responsible for writing logs
+        public void WriteData(long startSize, long tmpSize) // no reason to make it public
         {
             using (StreamWriter sr = new StreamWriter(path, true, System.Text.Encoding.Default))
             {
