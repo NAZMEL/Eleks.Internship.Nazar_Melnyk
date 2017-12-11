@@ -1,23 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Globalization;
 using System.IO;
 
 namespace SystemAnalyzer
 {
-    class DisckDetection
+    class DisckDetection : Recorder
     {
-
-        public string path = @"C:\Temp\SystemAnalyzer.txt";
-
-        CultureInfo currentTime = new CultureInfo("en-GB");
-
-        private static long start_Status_Memory { set; get; }
-        private static long current_Status_Memory { set; get; }
-        private static DriveInfo drive;
+        static long start_Status_Memory { set; get; }
+        static long current_Status_Memory { set; get; }
+        DriveInfo drive;
 
         public DisckDetection()
         {
@@ -27,16 +17,17 @@ namespace SystemAnalyzer
             start_Status_Memory = FreezeSize();
         }
 
-        private static void ExistDirectory(string directoryName)
+        void ExistDirectory(string directoryName)
         {
             if (!Directory.Exists(directoryName)) Directory.CreateDirectory(directoryName);
         }
-        private static long FreezeSize()
+
+        long FreezeSize()
         {
             return (ConvertToMB(drive.TotalFreeSpace));
         }
 
-        private static long ConvertToMB(long b)
+        long ConvertToMB(long b)
         {
             return (b / 1024) / 1024;
         }
@@ -45,36 +36,24 @@ namespace SystemAnalyzer
         {
             current_Status_Memory = FreezeSize();
             var tmpSize = start_Status_Memory - current_Status_Memory;
+
             if (tmpSize > 100.00 || tmpSize < -100.00)
             {
-                this.WriteData(start_Status_Memory, tmpSize);
-                start_Status_Memory = current_Status_Memory;
-            }
-        }
+                RecordMessage($"Об'єм вiльного мiсця на диску C змiнився iз {start_Status_Memory}Мб на {current_Status_Memory}Мб з рiзницею {Math.Abs(tmpSize)}Мб.");
 
-        public void WriteData(long startSize, long tmpSize)
-        {
-            using (StreamWriter sr = new StreamWriter(path, true, System.Text.Encoding.Default))
-            {
-                sr.WriteLine($@"[{String.Format(DateTime.Now.ToString(currentTime))}] --- Об'єм вiльного мiсця на диску змiнився iз {startSize}Мб на {current_Status_Memory}Мб з рiзницею {Math.Abs(tmpSize)}Мб.");
+                start_Status_Memory = current_Status_Memory;
             }
         }
 
         public void WriteDataOnStart()
         {
-            using (StreamWriter sr = new StreamWriter(path, true, System.Text.Encoding.Default))
-            {
-                sr.WriteLine("-----------------------------------------------------------------------------------------------------------------------------");
-                sr.WriteLine($@"[{String.Format(DateTime.Now.ToString(currentTime))}] --- Об'єм вiльного мiсця на диску С на час запущення служби - {start_Status_Memory}Мб ");
-            }
+            RecordMessage("-----------------------------------------------------------------------------------------------------------------------------");
+            RecordMessage($"Об'єм вiльного мiсця на диску С на час запущення служби - {start_Status_Memory} Мб.");
         }
 
         public void WriteDataOnEnd()
         {
-            using (StreamWriter sr = new StreamWriter(path, true, System.Text.Encoding.Default))
-            {
-                sr.WriteLine($@"[{String.Format(DateTime.Now.ToString(currentTime))}] --- Об'єм вiльного мiсця на диску С на час завершення роботи служби - {start_Status_Memory}Мб ");
-            }
+            RecordMessage($"Об'єм вiльного мiсця на диску С на час завершення роботи служби - {start_Status_Memory} Мб.");
         }
     }
 }

@@ -68,6 +68,7 @@
       <DependentUpon>Installer1.cs</DependentUpon>
     </Compile>
     <Compile Include="NetworkStatus.cs" />
+    <Compile Include="Recorder.cs" />
     <Compile Include="Service1.cs">
       <SubType>Component</SubType>
     </Compile>

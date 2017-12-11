@@ -1,27 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net.NetworkInformation;
-using System.Globalization;
-using System.IO;
+﻿using System.Net.NetworkInformation;
 
 namespace SystemAnalyzer
 {
-    class StatusNetwork
+    class StatusNetwork : Recorder
     {
         string server = "google.com";
-        Ping ping = new System.Net.NetworkInformation.Ping();
-        public string path = @"C:\Temp\SystemAnalyzer.txt";
-        CultureInfo currentTime = new CultureInfo("uk-UA");
-        bool general;
+        Ping ping = new Ping();
+        bool currentStatus;
+
         public StatusNetwork()
         {
-            general = TestNetStatus();
+            currentStatus = TestNetStatus();
         }
 
-        public bool TestNetStatus()
+        bool TestNetStatus()
         {
             try
             {
@@ -37,28 +29,25 @@ namespace SystemAnalyzer
         public void WriteStatusNet()
         {
             bool tmp = TestNetStatus();
-            if (general == tmp) { return; }
-            general = tmp;
+            if (currentStatus == tmp) { return; }
+
+            currentStatus = tmp;
             string netStatus;
+
             if (tmp) { netStatus = "підключено"; }
             else { netStatus = "відключено"; }
 
-            using (StreamWriter sr = new StreamWriter(path, true, System.Text.Encoding.Default))
-            {
-                sr.WriteLine($@"[{String.Format(DateTime.Now.ToString(currentTime))}] --- Зміна стану Інтернет-з'єднання - {netStatus}.");
-            }
+            RecordMessage($"Зміна стану Інтернет-з'єднання - {netStatus}.");
         }
 
         public void WriteStatusNetStartOrEnd()
         {
             string netStatus;
-            if (TestNetStatus()) { netStatus = @"Даний комп'ютер підключений до Інтернету"; }
-            else { netStatus = @"Даний комп'ютер не підключений до Інтернету"; }
 
-            using (StreamWriter sr = new StreamWriter(path, true, System.Text.Encoding.Default))
-            {
-                sr.WriteLine($@"[{String.Format(DateTime.Now.ToString(currentTime))}] --- {netStatus}.");
-            }
+            if (TestNetStatus()) { netStatus = "підключений"; }
+            else { netStatus = "не підключений"; }
+
+            RecordMessage($"Даний комп'ютер {netStatus} до Інтернету.");
         }
 
     }
