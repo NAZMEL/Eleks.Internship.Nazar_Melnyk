@@ -10,11 +10,11 @@ using System.ServiceProcess;
 namespace SystemAnalyzer
 {
     [RunInstaller(true)]
-    public partial class Installer1 : System.Configuration.Install.Installer
+    public partial class Installer : System.Configuration.Install.Installer
     {
         ServiceInstaller serviceInstaller;
         ServiceProcessInstaller processInstaller;
-        public Installer1()
+        public Installer()
         {
             InitializeComponent();
             serviceInstaller = new ServiceInstaller();

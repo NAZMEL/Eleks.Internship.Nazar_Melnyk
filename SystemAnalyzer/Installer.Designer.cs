@@ -1,6 +1,6 @@
 ﻿namespace SystemAnalyzer
 {
-    partial class Installer1
+    partial class Installer
     {
         /// <summary>
         /// Обязательная переменная конструктора.
